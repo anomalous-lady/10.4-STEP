@@ -1,58 +1,30 @@
-package com.train;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
-import java.util.Arrays;
-
-public class TrainApp {
+public class app {
 
     public static void main(String[] args) {
 
         System.out.println("=== Train Consist Management App ===");
 
-        // Example input (unsorted intentionally)
-        String[] bogieIds = {"BG309","BG101","BG550","BG205","BG412"};
+        // =========================
+        // UC5 STARTS HERE
+        // =========================
 
-        String searchKey = "BG205";
+        // Create LinkedHashSet
+        Set<String> trainFormation = new LinkedHashSet<>();
 
-        boolean result = binarySearch(bogieIds, searchKey);
+        // Add bogies
+        trainFormation.add("Engine");
+        trainFormation.add("Sleeper");
+        trainFormation.add("Cargo");
+        trainFormation.add("Guard");
 
-        if (result) {
-            System.out.println("Bogie ID " + searchKey + " found.");
-        } else {
-            System.out.println("Bogie ID " + searchKey + " not found.");
-        }
-    }
+        // Attempt duplicate
+        trainFormation.add("Sleeper"); // will be ignored
 
-    // ✅ Binary Search Method (TEST READY)
-    public static boolean binarySearch(String[] arr, String key) {
-
-        // Handle empty array
-        if (arr == null || arr.length == 0) {
-            return false;
-        }
-
-        // Sort array (handles unsorted input case)
-        Arrays.sort(arr);
-
-        int low = 0;
-        int high = arr.length - 1;
-
-        while (low <= high) {
-
-            int mid = low + (high - low) / 2; // safer mid calculation
-
-            int cmp = arr[mid].compareTo(key);
-
-            if (cmp == 0) {
-                return true;
-            }
-            else if (cmp < 0) {
-                low = mid + 1;
-            }
-            else {
-                high = mid - 1;
-            }
-        }
-
-        return false;
+        // Display formation
+        System.out.println("\nFinal Train Formation:");
+        System.out.println(trainFormation);
     }
 }
