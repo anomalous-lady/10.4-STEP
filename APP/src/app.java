@@ -1,6 +1,6 @@
 package com.train;
 
-import java.util.Arrays;
+import java.util.LinkedList;
 
 public class TrainApp {
 
@@ -8,51 +8,38 @@ public class TrainApp {
 
         System.out.println("=== Train Consist Management App ===");
 
-        // Example input (unsorted intentionally)
-        String[] bogieIds = {"BG309","BG101","BG550","BG205","BG412"};
+        // =========================
+        // UC4 STARTS HERE
+        // =========================
 
-        String searchKey = "BG205";
+        // Create LinkedList for train consist
+        LinkedList<String> trainConsist = new LinkedList<>();
 
-        boolean result = binarySearch(bogieIds, searchKey);
+        // Add bogies (order matters)
+        trainConsist.add("Engine");
+        trainConsist.add("Sleeper");
+        trainConsist.add("AC");
+        trainConsist.add("Cargo");
+        trainConsist.add("Guard");
 
-        if (result) {
-            System.out.println("Bogie ID " + searchKey + " found.");
-        } else {
-            System.out.println("Bogie ID " + searchKey + " not found.");
-        }
-    }
+        System.out.println("\nInitial Train Consist:");
+        System.out.println(trainConsist);
 
-    // ✅ Binary Search Method (TEST READY)
-    public static boolean binarySearch(String[] arr, String key) {
+        // Insert Pantry Car at position 2 (index-based)
+        trainConsist.add(2, "Pantry Car");
 
-        // Handle empty array
-        if (arr == null || arr.length == 0) {
-            return false;
-        }
+        System.out.println("\nAfter adding Pantry Car at position 2:");
+        System.out.println(trainConsist);
 
-        // Sort array (handles unsorted input case)
-        Arrays.sort(arr);
+        // Remove first and last bogie
+        trainConsist.removeFirst();
+        trainConsist.removeLast();
 
-        int low = 0;
-        int high = arr.length - 1;
+        System.out.println("\nAfter removing first and last bogie:");
+        System.out.println(trainConsist);
 
-        while (low <= high) {
-
-            int mid = low + (high - low) / 2; // safer mid calculation
-
-            int cmp = arr[mid].compareTo(key);
-
-            if (cmp == 0) {
-                return true;
-            }
-            else if (cmp < 0) {
-                low = mid + 1;
-            }
-            else {
-                high = mid - 1;
-            }
-        }
-
-        return false;
+        // Final consist
+        System.out.println("\nFinal Ordered Train Consist:");
+        System.out.println(trainConsist);
     }
 }
