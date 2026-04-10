@@ -1,49 +1,27 @@
-import java.util.*;
+import java.util.Arrays;
 
 public class app {
 
-    // ✅ Bubble Sort Method
-    public static void bubbleSort(int[] arr) {
-        int n = arr.length;
-
-        // Outer loop → number of passes
-        for (int i = 0; i < n - 1; i++) {
-
-            // Inner loop → compare adjacent elements
-            for (int j = 0; j < n - i - 1; j++) {
-
-                // Swap if out of order
-                if (arr[j] > arr[j + 1]) {
-                    int temp = arr[j];
-                    arr[j] = arr[j + 1];
-                    arr[j + 1] = temp;
-                }
-            }
-        }
-    }
-
-    // ✅ Display Method
-    public static void display(int[] arr) {
-        for (int num : arr) {
-            System.out.print(num + " ");
-        }
-        System.out.println();
-    }
-
     public static void main(String[] args) {
 
-        // ✅ Example capacities
-        int[] capacities = {72, 56, 24, 70, 60};
+        // Step 1: Create array of bogie names
+        String[] bogieNames = {
+                "Sleeper",
+                "AC Chair",
+                "First Class",
+                "General",
+                "Luxury"
+        };
 
+        // Step 2: Print original array
         System.out.println("Before Sorting:");
-        display(capacities);
+        System.out.println(Arrays.toString(bogieNames));
 
-        // Sorting
-        bubbleSort(capacities);
+        // Step 3: Sort using Arrays.sort()
+        Arrays.sort(bogieNames);
 
-        System.out.println("After Sorting:");
-        display(capacities);
-
-        System.out.println("Program continues...");
+        // Step 4: Print sorted array
+        System.out.println("\nAfter Sorting:");
+        System.out.println(Arrays.toString(bogieNames));
     }
 }
