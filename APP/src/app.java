@@ -1,21 +1,5 @@
-import java.util.ArrayList;
-import java.util.List;
-
-// Reuse Bogie class
-class Bogie {
-    String name;
-    int capacity;
-
-    Bogie(String name, int capacity) {
-        this.name = name;
-        this.capacity = capacity;
-    }
-
-    @Override
-    public String toString() {
-        return name + "(" + capacity + ")";
-    }
-}
+import java.util.regex.Pattern;
+import java.util.regex.Matcher;
 
 public class app {
 
@@ -23,28 +7,37 @@ public class app {
 
         System.out.println("=== Train Consist Management App ===");
 
-        // =========================
-        // UC10 STARTS HERE
-        // =========================
+        // Sample Inputs (can be replaced with Scanner later)
+        String trainId = "TRN-1234";
+        String cargoCode = "PET-AB";
 
-        // Create bogie list
-        List<Bogie> bogies = new ArrayList<>();
-        bogies.add(new Bogie("Sleeper", 72));
-        bogies.add(new Bogie("AC Chair", 54));
-        bogies.add(new Bogie("First Class", 24));
+        // Regex Patterns
+        String trainRegex = "TRN-\\d{4}";
+        String cargoRegex = "PET-[A-Z]{2}";
 
-        System.out.println("\nBogies:");
-        System.out.println(bogies);
+        // Compile Patterns
+        Pattern trainPattern = Pattern.compile(trainRegex);
+        Pattern cargoPattern = Pattern.compile(cargoRegex);
 
-        // Calculate total capacity using map + reduce
-        int totalSeats = bogies.stream()
-                .map(b -> b.capacity)      // extract capacity
-                .reduce(0, Integer::sum);  // sum all
+        // Create Matchers
+        Matcher trainMatcher = trainPattern.matcher(trainId);
+        Matcher cargoMatcher = cargoPattern.matcher(cargoCode);
 
-        System.out.println("\nTotal Seating Capacity: " + totalSeats);
+        // Validate
+        boolean isTrainValid = trainMatcher.matches();
+        boolean isCargoValid = cargoMatcher.matches();
 
-        // Check original list unchanged
-        System.out.println("\nOriginal Bogies After Calculation:");
-        System.out.println(bogies);
+        // Output
+        if (isTrainValid) {
+            System.out.println("Train ID is Valid: " + trainId);
+        } else {
+            System.out.println("Train ID is Invalid: " + trainId);
+        }
+
+        if (isCargoValid) {
+            System.out.println("Cargo Code is Valid: " + cargoCode);
+        } else {
+            System.out.println("Cargo Code is Invalid: " + cargoCode);
+        }
     }
 }
