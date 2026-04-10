@@ -1,69 +1,49 @@
 import java.util.*;
 
-// ✅ Custom Runtime Exception
-class CargoSafetyException extends RuntimeException {
-    public CargoSafetyException(String message) {
-        super(message);
-    }
-}
+public class app {
 
-// ✅ Goods Bogie Class
-class GoodsBogie {
-    private String type;   // Rectangular / Cylindrical
-    private String cargo;
+    // ✅ Bubble Sort Method
+    public static void bubbleSort(int[] arr) {
+        int n = arr.length;
 
-    public GoodsBogie(String type) {
-        this.type = type;
-    }
+        // Outer loop → number of passes
+        for (int i = 0; i < n - 1; i++) {
 
-    public String getType() {
-        return type;
-    }
+            // Inner loop → compare adjacent elements
+            for (int j = 0; j < n - i - 1; j++) {
 
-    public String getCargo() {
-        return cargo;
-    }
-
-    // ✅ Cargo Assignment with try-catch-finally
-    public void assignCargo(String cargoType) {
-        try {
-            // ❌ Unsafe condition
-            if (type.equalsIgnoreCase("Rectangular") &&
-                    cargoType.equalsIgnoreCase("Petroleum")) {
-                throw new CargoSafetyException("Unsafe cargo assignment: Petroleum cannot be assigned to Rectangular bogie");
+                // Swap if out of order
+                if (arr[j] > arr[j + 1]) {
+                    int temp = arr[j];
+                    arr[j] = arr[j + 1];
+                    arr[j + 1] = temp;
+                }
             }
-
-            // ✅ Safe assignment
-            this.cargo = cargoType;
-            System.out.println("Cargo assigned successfully: " + cargoType + " → " + type);
-
-        } catch (CargoSafetyException e) {
-            System.out.println("Error: " + e.getMessage());
-        } finally {
-            System.out.println("Cargo assignment attempt completed for " + type + " bogie\n");
         }
     }
-}
 
-// ✅ Main App
-public class app {
+    // ✅ Display Method
+    public static void display(int[] arr) {
+        for (int num : arr) {
+            System.out.print(num + " ");
+        }
+        System.out.println();
+    }
 
     public static void main(String[] args) {
 
-        // Create bogies
-        GoodsBogie b1 = new GoodsBogie("Cylindrical");
-        GoodsBogie b2 = new GoodsBogie("Rectangular");
-        GoodsBogie b3 = new GoodsBogie("Rectangular");
+        // ✅ Example capacities
+        int[] capacities = {72, 56, 24, 70, 60};
 
-        // ✅ Safe assignment
-        b1.assignCargo("Petroleum");
+        System.out.println("Before Sorting:");
+        display(capacities);
 
-        // ❌ Unsafe assignment (will be handled)
-        b2.assignCargo("Petroleum");
+        // Sorting
+        bubbleSort(capacities);
 
-        // ✅ Another safe assignment
-        b3.assignCargo("Coal");
+        System.out.println("After Sorting:");
+        display(capacities);
 
-        System.out.println("Program continues safely...");
+        System.out.println("Program continues...");
     }
 }
